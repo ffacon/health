@@ -1,0 +1,72 @@
+<div>
+    <h2>
+        <span jhiTranslate="healthApp.bloodpressure.home.title">Bloodpressures</span>
+        <button class="btn btn-primary float-right jh-create-entity create-bloodpressure" [routerLink]="['/', { outlets: { popup: ['bloodpressure-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="healthApp.bloodpressure.home.createLabel">
+            Create new Bloodpressure
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="bloodpressures">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="date"><span jhiTranslate="healthApp.bloodpressure.date">Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="systolic"><span jhiTranslate="healthApp.bloodpressure.systolic">Systolic</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="diastolic"><span jhiTranslate="healthApp.bloodpressure.diastolic">Diastolic</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="user.login"><span jhiTranslate="healthApp.bloodpressure.user">User</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let bloodpressure of bloodpressures ;trackBy: trackId">
+                <td><a [routerLink]="['../bloodpressure', bloodpressure.id ]">{{bloodpressure.id}}</a></td>
+                <td>{{bloodpressure.date | date:'mediumDate'}}</td>
+                <td>{{bloodpressure.systolic}}</td>
+                <td>{{bloodpressure.diastolic}}</td>
+                <td>
+                    {{bloodpressure.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../bloodpressure', bloodpressure.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'bloodpressure/'+ bloodpressure.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'bloodpressure/'+ bloodpressure.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <div *ngIf="bloodpressures && bloodpressures.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+</div>
