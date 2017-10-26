@@ -3,6 +3,8 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { SERVER_API_URL } from '../../app.constants';
 
+import { JhiDateUtils } from 'ng-jhipster';
+
 import { Points } from './points.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
 
@@ -11,7 +13,7 @@ export class PointsService {
 
     private resourceUrl = SERVER_API_URL + 'api/points';
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private dateUtils: JhiDateUtils) { }
 
     create(points: Points): Observable<Points> {
         const copy = this.convert(points);
@@ -60,6 +62,8 @@ export class PointsService {
      */
     private convertItemFromServer(json: any): Points {
         const entity: Points = Object.assign(new Points(), json);
+        entity.date = this.dateUtils
+            .convertLocalDateFromServer(json.date);
         return entity;
     }
 
@@ -68,6 +72,8 @@ export class PointsService {
      */
     private convert(points: Points): Points {
         const copy: Points = Object.assign({}, points);
+        copy.date = this.dateUtils
+            .convertLocalDateToServer(points.date);
         return copy;
     }
 }

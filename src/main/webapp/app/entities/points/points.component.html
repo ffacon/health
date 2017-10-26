@@ -17,6 +17,11 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="date"><span jhiTranslate="healthApp.points.date">Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="exercise"><span jhiTranslate="healthApp.points.exercise">Exercise</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="meals"><span jhiTranslate="healthApp.points.meals">Meals</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="alcohol"><span jhiTranslate="healthApp.points.alcohol">Alcohol</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="notes"><span jhiTranslate="healthApp.points.notes">Notes</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="user.login"><span jhiTranslate="healthApp.points.user">User</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
@@ -24,6 +29,11 @@
             <tbody>
             <tr *ngFor="let points of points ;trackBy: trackId">
                 <td><a [routerLink]="['../points', points.id ]">{{points.id}}</a></td>
+                <td>{{points.date | date:'mediumDate'}}</td>
+                <td>{{points.exercise}}</td>
+                <td>{{points.meals}}</td>
+                <td>{{points.alcohol}}</td>
+                <td>{{points.notes}}</td>
                 <td>
                     {{points.user?.login}}
                 </td>

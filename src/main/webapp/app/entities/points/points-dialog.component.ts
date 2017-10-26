@@ -22,6 +22,7 @@ export class PointsDialogComponent implements OnInit {
     isSaving: boolean;
 
     users: User[];
+    dateDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,

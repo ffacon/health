@@ -22,6 +22,26 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="jhi_date" type="date">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="exercise" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="meals" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="alcohol" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="notes" type="varchar(140)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>

@@ -15,6 +15,11 @@
             "detail": {
                 "title": "Points"
             },
+            "date": "Date",
+            "exercise": "Exercise",
+            "meals": "Meals",
+            "alcohol": "Alcohol",
+            "notes": "Notes",
             "user": "User"
         }
     }

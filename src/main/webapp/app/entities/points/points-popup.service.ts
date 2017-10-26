@@ -26,6 +26,13 @@ export class PointsPopupService {
 
             if (id) {
                 this.pointsService.find(id).subscribe((points) => {
+                    if (points.date) {
+                        points.date = {
+                            year: points.date.getFullYear(),
+                            month: points.date.getMonth() + 1,
+                            day: points.date.getDate()
+                        };
+                    }
                     this.ngbModalRef = this.pointsModalRef(component, points);
                     resolve(this.ngbModalRef);
                 });

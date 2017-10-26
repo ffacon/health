@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -50,7 +51,7 @@ public class PointsResource {
      */
     @PostMapping("/points")
     @Timed
-    public ResponseEntity<Points> createPoints(@RequestBody Points points) throws URISyntaxException {
+    public ResponseEntity<Points> createPoints(@Valid @RequestBody Points points) throws URISyntaxException {
         log.debug("REST request to save Points : {}", points);
         if (points.getId() != null) {
             throw new BadRequestAlertException("A new points cannot already have an ID", ENTITY_NAME, "idexists");
@@ -72,7 +73,7 @@ public class PointsResource {
      */
     @PutMapping("/points")
     @Timed
-    public ResponseEntity<Points> updatePoints(@RequestBody Points points) throws URISyntaxException {
+    public ResponseEntity<Points> updatePoints(@Valid @RequestBody Points points) throws URISyntaxException {
         log.debug("REST request to update Points : {}", points);
         if (points.getId() == null) {
             return createPoints(points);
